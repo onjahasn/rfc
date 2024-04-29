@@ -1,0 +1,426 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "description": "<p>RFC</p><p>Données <strong>simulées</strong></p>",
+    "version": "1.0.0",
+    "title": "RFC"
+  },
+  "servers": [
+    {
+      "url": "https://127.0.0.1:8001/rfc/api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "PersonnePhysique",
+      "description": "Tout ce qui concerne les utilisateurs"
+    }
+  ],
+  "paths": {
+    "/personnes": {
+      "get": {
+        "tags": [
+          "PersonnePhysique"
+        ],
+        "summary": "Obtenir la liste des personnesPhysique",
+        "operationId": "get_personnes",
+        "responses": {
+          "200": {
+            "description": "Renvoie une collection des personnes physique",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfPersonnePhysique"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Renvoie une erreur, aucun élément trouvé"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PersonnePhysique"
+        ],
+        "summary": "Créer une PersonnePhysique",
+        "description": "Créer une PersonnePhysique en donnant toutes les informations nécessaires",
+        "operationId": "createPersonnePhysique",
+        "requestBody": {
+          "description": "Contenu complet d'une PersonnePhysique",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nom": {
+                    "type": "string"
+                  },
+                  "prenom": {
+                    "type": "string"
+                  },
+                  "canaldeContact": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "valeur": {
+                          "type": "string"
+                        },
+                        "ligne1": {
+                          "type": "string"
+                        },
+                        "ligne2": {
+                          "type": "string"
+                        },
+                        "ligne3": {
+                          "type": "string"
+                        },
+                        "ligne4": {
+                          "type": "string"
+                        },
+                        "ligne5": {
+                          "type": "string"
+                        },
+                        "ligne6": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "valeur"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "nom",
+                  "prenom"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "PersonnePhysique créé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonnePhysique"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/personnes/{id}": {
+      "get": {
+        "tags": [
+          "PersonnePhysique"
+        ],
+        "summary": "Récupère 1 utilisateur",
+        "description": "Récupère 1 utilisateur selon son Id",
+        "operationId": "getUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifiant de l'utilisateur",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Renvoi un utilisateur",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonnePhysique"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Utilisateur non trouvé"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PersonnePhysique"
+        ],
+        "summary": "Supprimer un utilisateur",
+        "description": "Supprime un utilisateur spécifique en utilisant son ID",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifiant de l'utilisateur à supprimer",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "PersonnePhysique supprimé"
+          },
+          "404": {
+            "description": "PersonnePhysique non trouvé"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PersonnePhysique"
+        ],
+        "summary": "Mettre à jour une PersonnePhysique",
+        "description": "Mettre à jour une PersonnePhysique existante en utilisant son identifiant",
+        "operationId": "updatePersonnePhysique",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID de la PersonnePhysique à mettre à jour",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Les données mises à jour de la PersonnePhysique",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nom": {
+                    "type": "string"
+                  },
+                  "prenom": {
+                    "type": "string"
+                  },
+                  "canaldeContact": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "valeur": {
+                          "type": "string"
+                        },
+                        "ligne1": {
+                          "type": "string"
+                        },
+                        "ligne2": {
+                          "type": "string"
+                        },
+                        "ligne3": {
+                          "type": "string"
+                        },
+                        "ligne4": {
+                          "type": "string"
+                        },
+                        "ligne5": {
+                          "type": "string"
+                        },
+                        "ligne6": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "valeur"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "nom",
+                  "prenom"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "PersonnePhysique mise à jour",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonnePhysique"
+                }
+              }
+            }                                                                   
+          },
+          "404": {
+            "description": "PersonnePhysique non trouvée"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PersonnePhysique"
+        ],
+        "summary": "Mettre à jour partiellement une PersonnePhysique",
+        "description": "Mettre à jour partiellement les informations d'une PersonnePhysique existante en utilisant son identifiant",
+        "operationId": "patchPersonnePhysique",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID de la PersonnePhysique à mettre à jour",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Les données à mettre à jour pour la PersonnePhysique",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nom": {
+                    "type": "string"
+                  },
+                  "prenom": {
+                    "type": "string"
+                  },
+                  "canaldeContact": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "valeur": {
+                          "type": "string"
+                        },
+                        "ligne1": {
+                          "type": "string"
+                        },
+                        "ligne2": {
+                          "type": "string"
+                        },
+                        "ligne3": {
+                          "type": "string"
+                        },
+                        "ligne4": {
+                          "type": "string"
+                        },
+                        "ligne5": {
+                          "type": "string"
+                        },
+                        "ligne6": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "PersonnePhysique mise à jour partiellement",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonnePhysique"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "PersonnePhysique non trouvée"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PersonnePhysique": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "prenom": {
+            "type": "string"
+          },
+          "canaldeContact": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "valeur": {
+                  "type": "string"
+                },
+                "ligne1": {
+                  "type": "string"
+                },
+                "ligne2": {
+                  "type": "string"
+                },
+                "ligne3": {
+                  "type": "string"
+                },
+                "ligne4": {
+                  "type": "string"
+                },
+                "ligne5": {
+                  "type": "string"
+                },
+                "ligne6": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "valeur"
+              ]
+            }
+          }
+        },
+        "required": [
+          "nom",
+          "prenom"
+        ]
+      },
+      "ArrayOfPersonnePhysique": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/PersonnePhysique"
+        }
+      }
+    }
+  }
+}
